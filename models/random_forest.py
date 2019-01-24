@@ -7,9 +7,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.model_selection import GridSearchCV
 
-def without_penalty():
-    X = numpy.loadtxt("../data/Train/X_train.txt")
-    y = numpy.loadtxt("../data/Train/y_train.txt")
+def without_penalty(X, y):
     X = feature_selection.dummy_selctor(X, 1)
     clf = RandomForestClassifier()
     n_estimators = [int(x) for x in numpy.linspace(start=50, stop=300, num=10)]
@@ -53,4 +51,6 @@ def without_penalty():
     print('mean scores of cv scores are:  {:0.3f}%.'.format(100 * numpy.mean(scores)))
 
 if __name__ == '__main__':
-    without_penalty()
+    X = numpy.loadtxt("../data/Train/X_train.txt")
+    y = numpy.loadtxt("../data/Train/y_train.txt")
+    without_penalty(X, y)

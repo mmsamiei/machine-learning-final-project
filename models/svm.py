@@ -8,9 +8,7 @@ from sklearn.model_selection import RandomizedSearchCV
 from sklearn.svm import LinearSVC
 from sklearn.model_selection import GridSearchCV
 
-def without_penalty():
-    X = numpy.loadtxt("../data/Train/X_train.txt")
-    y = numpy.loadtxt("../data/Train/y_train.txt")
+def without_penalty(X, y):
     X = feature_selection.dummy_selctor(X, 20)
     clf = SVC()
     C = [1e-1, 1e0, 1e1]
@@ -31,9 +29,7 @@ def without_penalty():
     print(scores)
     print(numpy.mean(scores))
 
-def penalty_l1():
-    X = numpy.loadtxt("../data/Train/X_train.txt")
-    y = numpy.loadtxt("../data/Train/y_train.txt")
+def penalty_l1(X, y):
     X = feature_selection.dummy_selctor(X, 300)
     clf = LinearSVC(penalty='l1', dual=False)
     C = [1e-4, 2e-4, 5e-4, 1e-3, 2e-3, 5e-3, 1e-2, 1e-1, 1, 1e1, 1e2]
@@ -50,9 +46,7 @@ def penalty_l1():
     print(scores)
     print('mean scores of cv scores are:  {:0.3f}%.'.format(100 * numpy.mean(scores)))
 
-def penalty_l2():
-    X = numpy.loadtxt("../data/Train/X_train.txt")
-    y = numpy.loadtxt("../data/Train/y_train.txt")
+def penalty_l2(X, y):
     X = feature_selection.dummy_selctor(X, 300)
     clf = LinearSVC(penalty='l2', dual=False)
     C = [1e-4, 2e-4, 5e-4, 1e-3, 2e-3, 5e-3, 1e-2, 1e-1, 1, 1e1, 1e2]
@@ -70,6 +64,7 @@ def penalty_l2():
     print('mean scores of cv scores are:  {:0.3f}%.'.format(100 * numpy.mean(scores)))
 
 if __name__ == '__main__':
-    #without_penalty()
-    penalty_l1()
+    X = numpy.loadtxt("../data/Train/X_train.txt")
+    y = numpy.loadtxt("../data/Train/y_train.txt")
+    penalty_l1(X, y)
 

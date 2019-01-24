@@ -6,9 +6,9 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.ensemble import AdaBoostClassifier
 
-def without_penalty():
-    X = numpy.loadtxt("../data/Train/X_train.txt")
-    y = numpy.loadtxt("../data/Train/y_train.txt")
+def without_penalty(X, y):
+    #X = numpy.loadtxt("../data/Train/X_train.txt")
+    #y = numpy.loadtxt("../data/Train/y_train.txt")
     X = feature_selection.dummy_selctor(X, 20)
     clf = AdaBoostClassifier()
     n_estimators = [int(x) for x in numpy.linspace(start=50, stop=200, num=10)]
@@ -25,4 +25,6 @@ def without_penalty():
     print(numpy.mean(scores))
 
 if __name__ == '__main__':
-    without_penalty()
+    X = numpy.loadtxt("../data/Train/X_train.txt")
+    y = numpy.loadtxt("../data/Train/y_train.txt")
+    without_penalty(X, y)
