@@ -8,12 +8,12 @@ from sklearn.model_selection import cross_val_score
 
 import sknn
 
-def without_penalty(X, y):
-    X = feature_selection.dummy_selctor(X, 40)
-    #X_train, X_valid, y_train, y_valid = train_test_split(X, y, test_size=0.3)
+def find_hyperparameter(X, y):
     clf = LogisticRegression(C=numpy.inf, multi_class='multinomial', solver='newton-cg')
     scores = cross_val_score(clf, X, y, cv=5)
-    print(scores)
+    print("cross validation scores of best moddel are :", scores)
+    print("mean of cross validation scores of best model is:", numpy.mean(scores))
+    return clf
 
 
 if __name__ == '__main__':
