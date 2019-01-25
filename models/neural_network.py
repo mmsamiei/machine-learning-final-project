@@ -7,7 +7,7 @@ from sklearn.model_selection import RandomizedSearchCV
 from sklearn.neural_network import MLPClassifier
 
 def without_penalty(X, y):
-    X = feature_selection.dummy_selctor(X, 200)
+    #X = feature_selection.dummy_selctor(X, 200)
     clf = MLPClassifier(max_iter=1000)
     hidden_layer_sizes = [int(x) for x in numpy.linspace(8, 128, 16)]
     activation = ['identity', 'logistic', 'tanh', 'relu']
@@ -20,13 +20,14 @@ def without_penalty(X, y):
         'alpha' : alpha,
         'learning_rate' : learning_rate
     }
-    clf_random = RandomizedSearchCV(estimator=clf, param_distributions=random_grid, n_iter=20, cv=3, n_jobs=-1)
+    clf_random = RandomizedSearchCV(estimator=clf, param_distributions=random_grid, n_iter=32, cv=3, n_jobs=-1)
     clf_random.fit(X, y)
     best_random_model = clf_random.best_estimator_
     print(best_random_model.get_params())
     scores = cross_val_score(best_random_model, X, y, cv=5)
     print(scores)
     print(numpy.mean(scores))
+    return best_random_model
 
 if __name__ == '__main__':
     X = numpy.loadtxt("../data/Train/X_train.txt")

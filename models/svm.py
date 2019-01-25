@@ -7,6 +7,7 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.svm import LinearSVC
 from sklearn.model_selection import GridSearchCV
+from sklearn.utils import shuffle
 
 def without_penalty(X, y):
     X = feature_selection.dummy_selctor(X, 20)
@@ -66,5 +67,6 @@ def penalty_l2(X, y):
 if __name__ == '__main__':
     X = numpy.loadtxt("../data/Train/X_train.txt")
     y = numpy.loadtxt("../data/Train/y_train.txt")
-    penalty_l1(X, y)
+    X, y = shuffle(X, y)
+    penalty_l1(X[:500], y[:500])
 

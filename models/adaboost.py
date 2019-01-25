@@ -7,12 +7,9 @@ from sklearn.model_selection import RandomizedSearchCV
 from sklearn.ensemble import AdaBoostClassifier
 
 def without_penalty(X, y):
-    #X = numpy.loadtxt("../data/Train/X_train.txt")
-    #y = numpy.loadtxt("../data/Train/y_train.txt")
-    X = feature_selection.dummy_selctor(X, 20)
     clf = AdaBoostClassifier()
     n_estimators = [int(x) for x in numpy.linspace(start=50, stop=200, num=10)]
-    learning_rate = [0.7, 0.8, 0.9, 1]
+    learning_rate = [0.8, 0.9, 1]
     random_grid = {
         'n_estimators': n_estimators,
         'learning_rate': learning_rate
@@ -23,8 +20,10 @@ def without_penalty(X, y):
     scores = cross_val_score(best_random_model, X, y, cv=5)
     print(scores)
     print(numpy.mean(scores))
+    best_random_model.fit(X, y)
+    return best_random_model
 
 if __name__ == '__main__':
     X = numpy.loadtxt("../data/Train/X_train.txt")
     y = numpy.loadtxt("../data/Train/y_train.txt")
-    without_penalty(X, y)
+    without_penalty(X[:100], y[:100])

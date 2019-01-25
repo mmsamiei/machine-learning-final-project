@@ -6,6 +6,7 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.model_selection import cross_val_score
 
+import sknn
 
 def without_penalty(X, y):
     X = feature_selection.dummy_selctor(X, 40)
