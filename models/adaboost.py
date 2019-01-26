@@ -6,6 +6,12 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.ensemble import AdaBoostClassifier
 
+params = {'algorithm': 'SAMME.R',
+ 'base_estimator': None,
+ 'learning_rate': 0.8,
+ 'n_estimators': 83,
+ 'random_state': None}
+
 def find_hyperparameter(X, y):
     clf = AdaBoostClassifier()
     n_estimators = [int(x) for x in numpy.linspace(start=50, stop=200, num=10)]

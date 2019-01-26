@@ -9,6 +9,22 @@ from sklearn.svm import LinearSVC
 from sklearn.model_selection import GridSearchCV
 from sklearn.utils import shuffle
 
+params = {'C': 1.0,
+          'cache_size': 200,
+          'class_weight': None,
+          'coef0': 0.0,
+          'decision_function_shape': 'ovr',
+          'degree': 2,
+          'gamma': 'scale',
+          'kernel': 'linear',
+          'max_iter': -1,
+          'probability': False,
+          'random_state': None,
+          'shrinking': True,
+          'tol': 0.001,
+          'verbose': False}
+
+
 def find_hyperparameter(X, y):
     clf = SVC()
     C = [1e-1, 1e0, 1e1]
@@ -29,6 +45,7 @@ def find_hyperparameter(X, y):
     print("cross validation scores of best moddel are :", scores)
     print("mean of cross validation scores of best model is:", numpy.mean(scores))
     return best_random_model
+
 
 def without_penalty(X, y):
     X = feature_selection.dummy_selctor(X, 20)
@@ -51,9 +68,10 @@ def without_penalty(X, y):
     print(scores)
     print(numpy.mean(scores))
 
+
 def penalty_l1(X, y):
     X = feature_selection.dummy_selctor(X, 300)
-    clf = LinearSVC(penalty='l1', dual=False)
+    clf = LinearSVC(params)
     C = [1e-4, 2e-4, 5e-4, 1e-3, 2e-3, 5e-3, 1e-2, 1e-1, 1, 1e1, 1e2]
     complete_grid = {
         'C': C,
@@ -67,6 +85,7 @@ def penalty_l1(X, y):
     print("cv scores of the best svm is:")
     print(scores)
     print('mean scores of cv scores are:  {:0.3f}%.'.format(100 * numpy.mean(scores)))
+
 
 def penalty_l2(X, y):
     X = feature_selection.dummy_selctor(X, 300)
@@ -85,9 +104,9 @@ def penalty_l2(X, y):
     print(scores)
     print('mean scores of cv scores are:  {:0.3f}%.'.format(100 * numpy.mean(scores)))
 
+
 if __name__ == '__main__':
     X = numpy.loadtxt("../data/Train/X_train.txt")
     y = numpy.loadtxt("../data/Train/y_train.txt")
     X, y = shuffle(X, y)
     penalty_l1(X[:500], y[:500])
-
