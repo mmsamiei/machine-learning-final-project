@@ -31,6 +31,12 @@ def find_hyperparameter(X, y):
     print("mean of cross validation scores of best model is:", numpy.mean(scores))
     return clf
 
+def without_penalty(X, y):
+    clf = LogisticRegression()
+    clf.set_params(**params)
+    clf.fit(X, y)
+    return clf
+
 def penalty_l1(X, y, l):
     clf = LogisticRegression().set_params(**params)
     clf.C = 1/l
