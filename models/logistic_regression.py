@@ -42,11 +42,11 @@ def penalty_l1(X, y, l):
     clf.C = 1/l
     clf.penalty = 'l1'
     clf.solver = 'saga'
-    scores = cross_val_score(clf, X, y, cv=5)
-    print("cross validation scores of logistic regression model with l1 = {} are :".format(l), scores)
-    print("mean of cross validation scores of logistic regression with l1 = {} model is:".format(l), numpy.mean(scores))
+    #scores = cross_val_score(clf, X, y, cv=5)
+    #print("cross validation scores of logistic regression model with l1 = {} are :".format(l), scores)
+    #print("mean of cross validation scores of logistic regression with l1 = {} model is:".format(l), numpy.mean(scores))
     clf.fit(X, y)
-    return numpy.mean(scores), clf
+    return clf
 
 def penalty_l2(X, y, l):
     clf = LogisticRegression().set_params(**params)
