@@ -58,7 +58,7 @@ def penalty_l2(X, y, l):
     clf.dual = False
     clf.max_iter = 2500
     clf.penalty = 'l2'
-    clf.C = l
+    clf.C = 1/l
     clf.fit(X, y)
     return clf
 
@@ -67,7 +67,7 @@ def penalty_l1(X, y, l):
     clf.dual = False
     clf.max_iter = 2500
     clf.penalty = 'l1'
-    clf.C = l
+    clf.C = 1/l
     clf.fit(X, y)
     return clf
 
